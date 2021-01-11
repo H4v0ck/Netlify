@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
-seoTitle: Index Title
-seoDescription: Index Description
+seoTitle: ProgHunt
+seoDescription: "Plunder  Luxcury Products "
 categories:
   - title: Buying Guides
     links:
