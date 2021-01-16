@@ -40,6 +40,18 @@ const SiteData = () => {
             navbarShadow
             headerTextColor
           }
+          ads {
+            enableAds
+            disabledPostsAds
+            adCodes {
+              afterToC
+              afterTitle
+              insideBody
+              sidebarSticky
+              beforeAuthor
+              stickyMobile
+            }
+          }
           logoSmall {
             base
             childImageSharp {

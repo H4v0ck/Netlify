@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/Layout";
 import HeadData from "../components/HeadData.js";
-import Calendar from "../svg-icons/calendar.js";
+import { Calendar } from "../components/SVG.js";
 import SiteMetaData from "../components/SiteMetadata.js";
 import { FindCategory, FillSpace, LinkFix } from "../components/SimpleFunctions.js";
 
@@ -13,7 +13,7 @@ const IndexTemplate = ({ data }) => {
   const allPosts = data.posts.nodes;
   const sections = data.allMarkdownRemark.categories
     .map((category) => {
-      const posts = allPosts.filter((post) => post.frontmatter.category === category.frontmatter.id).slice(0, 5);
+      const posts = allPosts.filter((post) => post.frontmatter.category === category.frontmatter.id).slice(0, 6);
       return { title: category.frontmatter.title, posts };
     })
     .filter((category) => category.posts.length);

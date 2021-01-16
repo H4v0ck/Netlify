@@ -1,9 +1,5 @@
 import React from "react";
-import Calendar from "../../svg-icons/calendar.js";
-import CommentDots from "../../svg-icons/comment-dots.js";
-import Facebook from "../../svg-icons/facebook.js";
-import Twitter from "../../svg-icons/twitter.js";
-import Pinterest from "../../svg-icons/pinterest.js";
+import { Calendar, CommentDots, Facebook, Twitter, Pinterest } from "../SVG.js";
 import SiteMetaData from "../SiteMetadata.js";
 import { CommentCount } from "gatsby-plugin-disqus";
 

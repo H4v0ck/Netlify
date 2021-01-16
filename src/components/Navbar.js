@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "gatsby";
 import SiteMetaData from "./SiteMetadata.js";
-import ArrowDown from "../svg-icons/arrow-down.js";
+import { ArrowDown } from "./SVG.js";
 import { LinkFix } from "./SimpleFunctions";
 
 const Navbar = () => {

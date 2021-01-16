@@ -1,10 +1,6 @@
-.sidebar .instant-search {
-  max-width: 100%;
-  margin-bottom: 15px;
-}
 .instant-search {
-  width: 550px;
-  max-width: 90%;
+  max-width: 100%;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;

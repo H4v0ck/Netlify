@@ -331,6 +331,7 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     table: ProductTable
     title: String
     btnText: String
+    hidefeaturedimage: Boolean
   }
 
   type Product @infer {
@@ -391,6 +392,7 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     cookies: Cookies
     topNav: [Nav]
     colors: Colors
+    ads: Ads
     footerNav: [CategoryLink]
     logoSmall: File! @fileByRelativePath
     logoLarge: File! @fileByRelativePath
@@ -421,6 +423,21 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
 
   type Colors @infer {
     headerTextColor: String
+  }
+
+  type Ads @infer {
+    enableAds: Boolean
+    disabledPostsAds: [String]
+    adCodes: AdCodes
+  }
+
+  type AdCodes @infer {
+    afterToC: String 
+    afterTitle: String 
+    insideBody: String 
+    sidebarSticky: String
+    beforeAuthor: String
+    stickyMobile: String
   }
 `);
 };

@@ -594,6 +594,8 @@ div#gatsby-focus-wrapper > div {
 }
 .CookieConsent {
   box-shadow: var(--default-box-shadow);
+  background: var(--custom-color-2) !important;
+  color: var(--custom-color-4) !important;
 }
 @media (min-width: 1024px) {
   .column.is-9 {

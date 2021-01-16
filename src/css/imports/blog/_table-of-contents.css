@@ -48,12 +48,12 @@
   text-align: center;
   padding: 5px 0;
 }
-.toc-bottom a {
+.toc-bottom div {
   display: block;
   padding: 5px;
   text-align: center;
 }
-.toc-bottom a p {
+.toc-bottom div p {
   font-weight: 500;
   margin-bottom: 0;
   font-size: 15px;
@@ -61,8 +61,7 @@
 .toc-bottom img {
   width: auto;
 }
-.toc-bottom {
-  padding-bottom: 4px;
+.toc-top + .toc-bottom {
   margin-top: 8px;
 }
 @media (max-width: 767px) {

@@ -204,8 +204,10 @@ export const ProductsTable = ({ products, title, productColumns }) => {
                 <a href={`#${CreateID(item.name)}`}>{item.name}</a>
               </div>
             </td>
-            {productColumns?.map((column) => (
-              <td className="tb-column">{item.specs.find((spec) => spec.name === column)?.value}</td>
+            {productColumns?.map((column, index) => (
+              <td key={index} className="tb-column">
+                {item.specs.find((spec) => spec.name === column)?.value}
+              </td>
             ))}
             <td className="tb-column">
               <a href={item.link} className="su-button" target="_blank" rel="nofollow noreferrer">

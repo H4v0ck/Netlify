@@ -89,8 +89,7 @@
   overflow: hidden;
   position: absolute;
   top: 35px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0;
   background: var(--custom-color-1);
 }
 .open-parent svg {

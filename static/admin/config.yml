@@ -110,6 +110,75 @@ collections:
                 ],
             }
           - {
+              label: "Ads",
+              name: "ads",
+              widget: "object",
+              fields:
+                [
+                  {
+                    label: "Enable Ads",
+                    name: "enableAds",
+                    widget: "boolean",
+                    required: false,
+                  },
+                  {
+                    label: "Ads disabled on posts",
+                    name: "disabledPostsAds",
+                    widget: relation,
+                    collection: blog,
+                    value_field: slug,
+                    search_fields: ["title", "slug"],
+                    display_fields: ["title"],
+                    multiple: true,
+                    required: false,
+                  },
+                  {
+                    label: "Ad Codes",
+                    name: "adCodes",
+                    widget: "object",
+                    fields:
+                      [
+                        {
+                          label: "After table of contents",
+                          name: "afterToC",
+                          widget: "mdx",
+                          required: false,
+                        },
+                        {
+                          label: "After first body title",
+                          name: "afterTitle",
+                          widget: "mdx",
+                          required: false,
+                        },
+                        {
+                          label: "Middle of body",
+                          name: "insideBody",
+                          widget: "mdx",
+                          required: false,
+                        },
+                        {
+                          label: "Sidebar sticky",
+                          name: "sidebarSticky",
+                          widget: "mdx",
+                          required: false,
+                        },
+                        {
+                          label: "Before Author",
+                          name: "beforeAuthor",
+                          widget: "mdx",
+                          required: false,
+                        },
+                        {
+                          label: "Sticky at bottom for Mobile",
+                          name: "stickyMobile",
+                          widget: "mdx",
+                          required: false,
+                        },
+                      ],
+                  },
+                ],
+            }
+          - {
               label: "Top Navigation",
               name: "topNav",
               widget: "list",
@@ -232,6 +301,11 @@ collections:
           pattern: ["^.{0,165}$", "Can;t have more than 160 characters"],
         }
       - { label: "Featured Image", name: "featuredimage", widget: image }
+      - {
+          label: "Hide Featured Image on Blog Post",
+          name: "hidefeaturedimage",
+          widget: "boolean",
+        }
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Modified Date", name: "moddate", widget: "datetime" }
       - {
@@ -276,7 +350,7 @@ collections:
       - {
           label: "Before Body",
           name: "beforebody",
-          widget: "markdown",
+          widget: "mdx",
           default: "",
           required: false,
         }
@@ -317,13 +391,7 @@ collections:
               },
             ],
         }
-      - {
-          label: "Body",
-          name: "body",
-          widget: "markdown",
-          default: "",
-          required: false,
-        }
+      - { label: "Body", name: "body", widget: "mdx", required: false }
       - {
           label: "Products",
           name: "products",
@@ -341,7 +409,7 @@ collections:
               },
               { label: "Product Image", name: "image", widget: "image" },
               { label: "Product Link", name: "link", widget: "string" },
-              { label: "Product Body", name: "body", widget: "markdown" },
+              { label: "Product Body", name: "body", widget: "mdx" },
               {
                 label: "Pros",
                 name: "pros",
@@ -382,7 +450,7 @@ collections:
       - {
           label: "After Body",
           name: "afterbody",
-          widget: "markdown",
+          widget: "mdx",
           default: "",
           required: false,
         }
