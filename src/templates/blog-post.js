@@ -39,7 +39,7 @@ export const BlogPostTemplate = (props) => {
   const disqusConfig = {
     url: link,
   };
-  const showAds = ads?.enableAds && !ads?.disabledPostsAds.includes(slug);
+  const showAds = ads?.enableAds && !ads?.disabledPostsAds?.includes(slug);
 
   const scrollTop = () => {
     typeof window !== "undefined" &&
