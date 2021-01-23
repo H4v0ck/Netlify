@@ -1,10 +1,10 @@
 ---
 templateKey: index-page
-seoTitle: Index Title
-seoDescription: Index Description
+seoTitle: ProgHunt
+seoDescription: Hunt For Your Favourite Hunting Gear
 categories:
   - title: Buying Guides
     links:
-      - title: Best Buying Guides
-        link: /sample-post-buying/
+      - title: "Best Hunting Gear Guides "
+        link: /best-hunting-gear-guides/
 ---
