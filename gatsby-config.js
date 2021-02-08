@@ -1,11 +1,10 @@
 const path = require("path");
-const siteURL = "https://www.proghunt.com";
-const disqus = "proghunt-com";
+require("dotenv").config();
 
 module.exports = {
   siteMetadata: {
-    siteURL: siteURL,
-    siteUrl: siteURL,
+    siteURL: process.env.URL,
+    siteUrl: process.env.URL,
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -29,12 +28,6 @@ module.exports = {
       options: {
         path: `${__dirname}/src/posts`,
         name: "posts",
-      },
-    },
-    {
-      resolve: `gatsby-plugin-disqus`,
-      options: {
-        shortname: disqus,
       },
     },
     "gatsby-plugin-sharp",
@@ -83,19 +76,6 @@ module.exports = {
       resolve: "gatsby-plugin-mdx-frontmatter",
     },
     "gatsby-plugin-slug",
-    {
-      resolve: "gatsby-plugin-netlify-cms",
-      options: {
-        modulePath: `${__dirname}/src/cms/cms.js`,
-        customizeWebpackConfig: (config) => ((config.node.fs = "empty"), (config.node.child_process = "empty")),
-      },
-    },
-    {
-      resolve: `gatsby-plugin-canonical-urls`,
-      options: {
-        siteUrl: siteURL,
-      },
-    },
     `gatsby-plugin-remove-fingerprints`,
     {
       resolve: `gatsby-plugin-sitemap`,
@@ -104,7 +84,14 @@ module.exports = {
       },
     },
     "gatsby-plugin-robots-txt",
-    "gatsby-plugin-netlify",
+    {
+      resolve: "gatsby-plugin-netlify-cms",
+      options: {
+        manualInit: true,
+        modulePath: `${__dirname}/src/cms/cms.js`,
+        customizeWebpackConfig: (config) => ((config.node.fs = "empty"), (config.node.child_process = "empty")),
+      },
+    },
     {
       resolve: "gatsby-plugin-purgecss", // purges all unused/unreferenced css rules
       options: {

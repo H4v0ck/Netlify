@@ -22,9 +22,11 @@ const SiteData = () => {
           youtube
           twitter
           facebook
+          disqus
           number
           dmca
           dmcaLink
+          linkType
           cookies {
             enabled
             message

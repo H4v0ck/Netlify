@@ -49,7 +49,7 @@ const SidebarTableofContents = ({ data, ad }) => {
           <div className="toc-bottom">
             <p className="toc-bottom-heading">{sTitle}</p>
             <div>
-              <LinkTag href={sLink} rel="nofollow noopener noreferrer" target="_blank">
+              <LinkTag href={sLink} rel="nofollow noopener" target="_blank">
                 <picture>
                   <source srcSet={`/image/sidebar/${ImgName}.webp`} />
                   <img src={`/img/${Img}`} alt={sText} loading="lazy" width={imgWidth} height={imgHeight} />

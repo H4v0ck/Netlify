@@ -54,9 +54,11 @@ const LatestPosts = () => {
                   </picture>
                 </Link>
               </div>
-              <div className="index-box-category">
-                <Link to={`${categoryLink}/`}>{categoryName}</Link>
-              </div>
+              {categoryLink && (
+                <div className="index-box-category">
+                  <Link to={`${categoryLink}/`}>{categoryName}</Link>
+                </div>
+              )}
               <div className="index-box-title">
                 <Link to={`${slug}/`}>{title}</Link>
               </div>

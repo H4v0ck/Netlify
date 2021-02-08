@@ -15,8 +15,8 @@ const AuthorPage = (props) => {
   const { width, height } = post.frontmatter.image.childImageSharp.original;
 
   return (
-    <Layout title={title}>
-      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} />
+    <Layout>
+      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} slug={post.fields.slug} />
       <section className="section author-page">
         <div className="container">
           <div className="author-top">
@@ -120,32 +120,10 @@ export default AuthorPage;
 
 export const authorPageQuery = graphql`
   query AuthorPageByID($id: String!, $author: String!, $skip: Int!, $limit: Int!) {
-    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { author: { eq: $author } } }, limit: $limit, skip: $skip) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            category
-            date(formatString: "MMMM DD, YYYY")
-            featuredimage {
-              name
-              base
-              childImageSharp {
-                original {
-                  height
-                  width
-                }
-              }
-            }
-          }
-        }
-      }
-    }
     markdownRemark(id: { eq: $id }) {
+      fields {
+        slug
+      }
       frontmatter {
         title
         seoTitle
@@ -157,6 +135,31 @@ export const authorPageQuery = graphql`
             original {
               height
               width
+            }
+          }
+        }
+      }
+    }
+    allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { author: { eq: $author } } }, limit: $limit, skip: $skip) {
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            category
+            date(fromNow: true)
+            featuredimage {
+              name
+              base
+              childImageSharp {
+                original {
+                  height
+                  width
+                }
+              }
             }
           }
         }

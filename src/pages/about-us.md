@@ -1,5 +1,5 @@
 ---
-templateKey: default-page
+templateKey: about-page
 title: About Us
 seoTitle: About Us
 seoDescription: I was searching for reviews about tech products I found that most of the websites weren't providing useful thats when I got the idea of ProgHunt.

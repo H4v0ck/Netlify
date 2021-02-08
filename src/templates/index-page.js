@@ -64,13 +64,13 @@ const IndexTemplate = ({ data }) => {
   return (
     <Layout>
       <section className="section index">
-        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} />
+        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} slug={data.markdownRemark.fields.slug} />
         <div className="container content">
           <div className="index-latest-title">
             <h2>Latest Posts</h2>
           </div>
           <div className="index-top-section">
-            <FirstPost post={singlePost} />
+            {singlePost && <FirstPost post={singlePost} />}
             <OtherPosts posts={otherPosts} />
           </div>
           <div className="index-bottom-section">
@@ -85,7 +85,7 @@ const IndexTemplate = ({ data }) => {
                     <div className="index-category" key={index}>
                       <h2>{item.title}</h2>
                       <div className="category-links">
-                        {item.links.map((item, index) => (
+                        {item.links?.map((item, index) => (
                           <div className="category-link" key={index}>
                             <Link to={LinkFix(item)}>{item.title}</Link>
                           </div>
@@ -220,6 +220,23 @@ const Sections = ({ sections }) => {
 
 export const IndexQuery = graphql`
   query IndexQuery($id: String!) {
+    markdownRemark(id: { eq: $id }) {
+      html
+      fields {
+        slug
+      }
+      frontmatter {
+        seoTitle
+        seoDescription
+        categories {
+          title
+          links {
+            title
+            link
+          }
+        }
+      }
+    }
     FP: allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1) {
       nodes {
         fields {
@@ -249,7 +266,7 @@ export const IndexQuery = graphql`
         }
         frontmatter {
           title
-          date(formatString: "MMMM DD, YYYY")
+          date(fromNow: true)
           category
           featuredimage {
             name
@@ -281,20 +298,6 @@ export const IndexQuery = graphql`
                 width
               }
             }
-          }
-        }
-      }
-    }
-    markdownRemark(id: { eq: $id }) {
-      html
-      frontmatter {
-        seoTitle
-        seoDescription
-        categories {
-          title
-          links {
-            title
-            link
           }
         }
       }

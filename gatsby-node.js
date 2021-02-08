@@ -8,7 +8,7 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      pages: allMarkdownRemark(filter: { frontmatter: { templateKey: { in: ["default-page", "index-page"] } } }) {
+      pages: allMarkdownRemark(filter: { frontmatter: { templateKey: { in: ["default-page", "index-page", "about-page"] } } }) {
         nodes {
           id
           fields {
@@ -126,7 +126,7 @@ exports.createPages = ({ actions, graphql }) => {
         const id = category.id;
         const categoryID = category.frontmatter.id;
         const slug = category.fields.slug;
-        const categoryCount = categoriesCount.filter((categoryCount) => categoryCount.category === categoryID)[0];
+        const categoryCount = categoriesCount.find((categoryCount) => categoryCount.category === categoryID);
         const totalPosts = categoryCount && categoryCount.totalCount;
         const postsPerPage = 6;
         const numPages = totalPosts ? Math.ceil(totalPosts / postsPerPage) : 1;
@@ -156,7 +156,7 @@ exports.createPages = ({ actions, graphql }) => {
         const id = author.id;
         const authorID = author.frontmatter.id;
         const slug = `/author${author.fields.slug}`;
-        const authorCount = authorsCount.filter((authorCount) => authorCount.author === authorID)[0];
+        const authorCount = authorsCount.find((authorCount) => authorCount.author === authorID);
         const totalPosts = authorCount && authorCount.totalCount;
         const postsPerPage = 6;
         const numPages = totalPosts ? Math.ceil(totalPosts / postsPerPage) : 1;
@@ -189,7 +189,7 @@ exports.createPages = ({ actions, graphql }) => {
 
         createPage({
           path: slug == "/index" ? "/" : `${slug}/`,
-          component: path.resolve(`src/templates/${tempKey}.js`),
+          component: path.resolve(`src/templates/${tempKey === "about-page" ? "default-page" : tempKey}.js`),
           // additional data can be passed via context
           context: {
             id,
@@ -319,9 +319,15 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   createTypes(`
   type Mdx implements Node {
     frontmatter: MdxFrontmatter
+    fields: MdxFields
+  }
+
+  type MdxFields {
+    slug: String
   }
 
   type MdxFrontmatter @infer {
+    templateKey: String
     featuredimage: File @fileByRelativePath
     beforebody: String @mdx
     afterbody: String @mdx
@@ -332,6 +338,17 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     title: String
     btnText: String
     hidefeaturedimage: Boolean
+    author: String
+    category: String
+    slug: String
+    seoDescription: String
+    seoTitle: String
+    date(formatString: String, fromNow: Boolean): Date @dateformat
+    moddate(formatString: String, fromNow: Boolean): Date @dateformat
+    tableofcontent: Boolean
+    rating: Boolean
+    rcount: Int
+    rvalue: Int
   }
 
   type Product @infer {
@@ -390,6 +407,11 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     seoDescription: String
     schema: String
     cookies: Cookies
+    disqus: String
+    facebook: String
+    twitter: String
+    youtube: String
+    number: String
     topNav: [Nav]
     colors: Colors
     ads: Ads
@@ -398,6 +420,7 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     logoLarge: File! @fileByRelativePath
     faviconSmall: File! @fileByRelativePath
     faviconLarge: File! @fileByRelativePath
+    linkType: Boolean
   }
 
   type HomeCategory {

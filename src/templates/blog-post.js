@@ -11,7 +11,7 @@ import Author from "../components/Author.js";
 import LatestPosts from "../components/LatestPosts.js";
 import RatingBox from "../components/blog/RatingBox";
 import { TopArrow } from "../components/SVG.js";
-import { Disqus } from "gatsby-plugin-disqus";
+import { DiscussionEmbed } from "disqus-react";
 import LazyLoad from "react-lazy-load";
 import SiteMetaData from "../components/SiteMetadata.js";
 import SidebarLatestPosts from "../components/sidebar/SidebarLatestPosts";
@@ -29,7 +29,7 @@ export const BlogPostTemplate = (props) => {
     tocdata,
     body,
   } = props;
-  const { title: siteName, ads } = SiteMetaData();
+  const { title: siteName, ads, disqus } = SiteMetaData();
   const adCodes = ads?.adCodes;
   const [btT, setBtT] = useState("");
   const contentRef = useRef(null);
@@ -38,6 +38,7 @@ export const BlogPostTemplate = (props) => {
   const { width, height } = featuredimage.childImageSharp.original;
   const disqusConfig = {
     url: link,
+    title: title,
   };
   const showAds = ads?.enableAds && !ads?.disabledPostsAds?.includes(slug);
 
@@ -105,7 +106,7 @@ export const BlogPostTemplate = (props) => {
                 )}
                 <div className="blog-section-top-inner">
                   <h1 className="title">{title}</h1>
-                  <BlogInfo date={date} disqusConfig={disqusConfig} title={title} image={img} />
+                  <BlogInfo date={date} disqusConfig={disqusConfig} disqus={disqus} title={title} image={img} />
                   <MDXProvider components={PostComps}>
                     <MDXRenderer>{beforebody}</MDXRenderer>
                   </MDXProvider>
@@ -124,7 +125,7 @@ export const BlogPostTemplate = (props) => {
                     {products?.map((item, index) => (
                       <div className="product-box" key={index}>
                         <PostComps.PTitle hlevel="3" title={item.name} />
-                        <PostComps.PImage alt={item.name} src={item.image?.base} link={item.link} />
+                        {item.image && <PostComps.PImage alt={item.name} src={item.image.base} link={item.link} />}
                         {!!item.specs?.length && <PostComps.SpecTable spec={item.specs} />}
                         <MDXProvider components={PostComps}>
                           <MDXRenderer>{item.body}</MDXRenderer>
@@ -155,11 +156,13 @@ export const BlogPostTemplate = (props) => {
               {rating && <RatingBox count={rcount} value={rvalue} />}
               {showAds && <div className="ads-author" dangerouslySetInnerHTML={{ __html: adCodes?.beforeAuthor }} />}
               <Author authorID={author} />
-              <div id="disqus_thread">
-                <LazyLoad offsetTop={topOffset}>
-                  <Disqus config={disqusConfig} />
-                </LazyLoad>
-              </div>
+              {disqus && (
+                <div id="disqus_thread">
+                  <LazyLoad offsetTop={topOffset}>
+                    <DiscussionEmbed config={disqusConfig} shortname={disqus} />
+                  </LazyLoad>
+                </div>
+              )}
             </div>
             <div className="column is-3">
               <div className="sidebar">
@@ -267,7 +270,7 @@ const BlogPost = (props) => {
     <Layout type="post" title={frontmatter.title} titleParent={categoryName} link={`${categoryLink}/`}>
       <BlogPostTemplate
         helmet={
-          <HeadData title={frontmatter.seoTitle} description={frontmatter.seoDescription} image={img}>
+          <HeadData title={frontmatter.seoTitle} description={frontmatter.seoDescription} image={img} slug={post.fields.slug}>
             {frontmatter.author && <script type="application/ld+json">{articleSchema}</script>}
             {frontmatter.rating && <script type="application/ld+json">{ratingSchema}</script>}
             {frontmatter.products?.length && <script type="application/ld+json">{productSchema}</script>}
@@ -298,6 +301,9 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id }) {
       id
       body
+      fields {
+        slug
+      }
       frontmatter {
         title
         slug
@@ -314,7 +320,7 @@ export const pageQuery = graphql`
           }
         }
         hidefeaturedimage
-        date(formatString: "MMMM DD, YYYY")
+        date(fromNow: true)
         sdate: date(formatString: "YYYY-MM-DDTHHmmss")
         moddate(formatString: "YYYY-MM-DDTHHmmss")
         tableofcontent

@@ -2,10 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import SiteMetaData from "./SiteMetadata";
 import { graphql, useStaticQuery, withPrefix } from "gatsby";
+import { parse } from "url";
+import PropTypes from "prop-types";
 
 const HeadData = (props) => {
   const { siteURL, title: siteName, logoLarge, faviconSmall, faviconLarge } = SiteMetaData();
-  const { title, description, image, schema } = props;
+  const { title, description, image, schema, slug } = props;
   const {
     allMarkdownRemark: { nodes: categories },
   } = useStaticQuery(graphql`
@@ -24,16 +26,18 @@ const HeadData = (props) => {
     "@context":"https://schema.org",
     "@graph":[
       ${categories.map(
-        ({ frontmatter }) => `{
+        ({ frontmatter: category }) => `{
         "@context":"https://schema.org",
         "@type":"SiteNavigationElement",
         "@id":"#Primary",
-        "name":"${frontmatter.title}",
-        "url":"${siteURL}/${frontmatter.slug}/"
+        "name":"${category.title}",
+        "url":"${siteURL}/${category.slug}/"
       }`
       )}
     ]}`;
   const index = props.index !== false;
+
+  const currentURL = parse(`${siteURL}${slug}/`);
 
   return (
     <Helmet>
@@ -43,13 +47,16 @@ const HeadData = (props) => {
       <meta name="theme-color" content="#fff" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="article" />
-      <meta property="og:title" content={`${title}`} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:image" content={`${siteURL}/${`img/${image || logoLarge.base}`}`} />
+      <meta property="og:url" content={currentURL.href} data-baseprotocol={currentURL.protocol} data-basehost={currentURL.host} />
+      <link rel="canonical" href={currentURL.href} data-baseprotocol={currentURL.protocol} data-basehost={currentURL.host} />
       <meta name="twitter:card" content="" />
       <meta name="twitter:creator" content="" />
-      <meta name="twitter:site" content="" />
+      <meta name="twitter:site" content={siteName} />
+      <meta name="twitter:title" content={title} />
       <link rel="icon" type="image/png" href={`${withPrefix("/")}img/${faviconLarge.base}`} sizes="32x32" />
       <link rel="icon" type="image/png" href={`${withPrefix("/")}img/${faviconSmall.base}`} sizes="16x16" />
       <script type="application/ld+json">{sitemapschema}</script>
@@ -60,6 +67,10 @@ const HeadData = (props) => {
       {props.children}
     </Helmet>
   );
+};
+
+HeadData.propTypes = {
+  slug: PropTypes.string.isRequired,
 };
 
 export default HeadData;

@@ -53,7 +53,7 @@ const CategoryPage = (props) => {
   return (
     <Layout>
       <section className="section category-post">
-        <HeadData title={`${cPage.seoTitle} - ${siteName}`} description={cPage.seoDescription} schema={articleSchema} />
+        <HeadData title={`${cPage.seoTitle} - ${siteName}`} description={cPage.seoDescription} schema={articleSchema} slug={props.data.markdownRemark.fields.slug} />
         <div className="container content">
           <div className="category-top-section">
             <h1>{cPage.title}</h1>
@@ -144,7 +144,7 @@ export const pageQuery = graphql`
           title
           author
           templateKey
-          date(formatString: "MMMM DD, YYYY")
+          date(fromNow: true)
           sdate: date(formatString: "YYYY-MM-DDTHHmmss")
           moddate(formatString: "YYYY-MM-DDTHHmmss")
           featuredimage {
@@ -161,6 +161,9 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(id: { eq: $id }) {
+      fields {
+        slug
+      }
       frontmatter {
         title
         description

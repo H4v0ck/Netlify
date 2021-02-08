@@ -10,7 +10,7 @@ const NotFoundPage = () => {
   return (
     <Layout>
       <section className="section notfound-page">
-        <HeadData title={`404 Page - ${siteName}`} description="Page not Found" />
+        <HeadData title={`404 Page - ${siteName}`} description="Page not Found" slug={"/404"} />
         <div className="container content">
           <div className="notfound_top_section">
             <h1 className="notfound_title">NOT FOUND</h1>

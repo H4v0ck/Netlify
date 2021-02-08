@@ -35,7 +35,7 @@ export const CreateID = (name) =>
     .split(" ")
     .join("_");
 
-export const LinkFix = (item) => (item.link.includes("/") ? item.link : `/${item.link}/`);
+export const LinkFix = (item) => (item.link?.includes("/") ? item.link : `/${item.link}/`);
 
 const FindItems = () => {
   const { authors, categories } = useStaticQuery(graphql`
@@ -66,4 +66,14 @@ const FindItems = () => {
   `);
 
   return { authors, categories };
+};
+
+export const ReplaceTitle = (content, data) => {
+  return content.replace(/\[\[([^\]]+)\]\]/g, (match, key) => {
+    const value = data[key];
+    if (typeof value !== "undefined") {
+      return value;
+    }
+    return match; // guards against some unintentional prefix
+  });
 };
