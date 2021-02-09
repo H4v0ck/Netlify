@@ -9,7 +9,7 @@ export default () => {
   return (
     <Layout title="Thanks" link="/contact-us/" titleParent="Contact Us">
       <section className="section default-page">
-        <HeadData title={`Thanks - ${siteName}`} description="Thanks for contacting us." index={false} slug={"/contact-us/thanks"} />
+        <HeadData title={`Thanks - ${siteName}`} description="Thanks for contacting us." index={false} />
         <div className="container">
           <div className="content">
             <h1>Thank you!</h1>

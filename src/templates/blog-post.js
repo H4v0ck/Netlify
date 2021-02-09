@@ -270,7 +270,7 @@ const BlogPost = (props) => {
     <Layout type="post" title={frontmatter.title} titleParent={categoryName} link={`${categoryLink}/`}>
       <BlogPostTemplate
         helmet={
-          <HeadData title={frontmatter.seoTitle} description={frontmatter.seoDescription} image={img} slug={post.fields.slug}>
+          <HeadData title={frontmatter.seoTitle} description={frontmatter.seoDescription} image={img}>
             {frontmatter.author && <script type="application/ld+json">{articleSchema}</script>}
             {frontmatter.rating && <script type="application/ld+json">{ratingSchema}</script>}
             {frontmatter.products?.length && <script type="application/ld+json">{productSchema}</script>}
@@ -301,9 +301,6 @@ export const pageQuery = graphql`
     mdx(id: { eq: $id }) {
       id
       body
-      fields {
-        slug
-      }
       frontmatter {
         title
         slug

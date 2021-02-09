@@ -67,7 +67,7 @@ const ContactUs = () => {
   return (
     <Layout title={title}>
       <section className="section default-page">
-        <HeadData title={title} description={description} schema={schema} slug={"/contact-us"} />
+        <HeadData title={title} description={description} schema={schema} />
         <div className="container">
           <div className="content">
             <h1 className="title">{title}</h1>

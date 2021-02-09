@@ -16,7 +16,7 @@ const AuthorPage = (props) => {
 
   return (
     <Layout>
-      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} slug={`/author${post.fields.slug}`} />
+      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} />
       <section className="section author-page">
         <div className="container">
           <div className="author-top">
@@ -121,9 +121,6 @@ export default AuthorPage;
 export const authorPageQuery = graphql`
   query AuthorPageByID($id: String!, $author: String!, $skip: Int!, $limit: Int!) {
     markdownRemark(id: { eq: $id }) {
-      fields {
-        slug
-      }
       frontmatter {
         title
         seoTitle

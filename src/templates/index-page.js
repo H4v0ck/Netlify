@@ -64,7 +64,7 @@ const IndexTemplate = ({ data }) => {
   return (
     <Layout>
       <section className="section index">
-        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} slug={""} />
+        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} />
         <div className="container content">
           <div className="index-latest-title">
             <h2>Latest Posts</h2>
@@ -222,9 +222,6 @@ export const IndexQuery = graphql`
   query IndexQuery($id: String!) {
     markdownRemark(id: { eq: $id }) {
       html
-      fields {
-        slug
-      }
       frontmatter {
         seoTitle
         seoDescription

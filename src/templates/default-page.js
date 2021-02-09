@@ -69,7 +69,7 @@ const DefaultPage = ({ data }) => {
 
   return (
     <Layout title={title}>
-      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} schema={pageType === "about-page" ? aboutUsSchema : false} slug={slug} />
+      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} schema={pageType === "about-page" ? aboutUsSchema : false} />
       <DefaultPageTemplate title={title} body={post.html} siteName={siteName} siteLink={siteURL} />
     </Layout>
   );

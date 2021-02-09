@@ -2,12 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import SiteMetaData from "./SiteMetadata";
 import { graphql, useStaticQuery, withPrefix } from "gatsby";
-import { parse } from "url";
-import PropTypes from "prop-types";
+import { Location } from "@reach/router";
 
 const HeadData = (props) => {
   const { siteURL, title: siteName, logoLarge, faviconSmall, faviconLarge } = SiteMetaData();
-  const { title, description, image, schema, slug } = props;
+  const { title, description, image, schema, location } = props;
+
   const {
     allMarkdownRemark: { nodes: categories },
   } = useStaticQuery(graphql`
@@ -35,9 +35,8 @@ const HeadData = (props) => {
       }`
       )}
     ]}`;
-  const index = props.index !== false;
 
-  const currentURL = parse(`${siteURL}${slug}/`);
+  const index = props.index !== false;
 
   return (
     <Helmet>
@@ -51,8 +50,8 @@ const HeadData = (props) => {
       <meta property="og:description" content={description} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:image" content={`${siteURL}/${`img/${image || logoLarge.base}`}`} />
-      <meta property="og:url" content={currentURL.href} data-baseprotocol={currentURL.protocol} data-basehost={currentURL.host} />
-      <link rel="canonical" href={currentURL.href} data-baseprotocol={currentURL.protocol} data-basehost={currentURL.host} />
+      <meta property="og:url" content={location.href} data-baseprotocol={location.protocol} data-basehost={location.host} />
+      <link rel="canonical" href={location.href} data-baseprotocol={location.protocol} data-basehost={location.host} />
       <meta name="twitter:card" content="" />
       <meta name="twitter:creator" content="" />
       <meta name="twitter:site" content={siteName} />
@@ -69,8 +68,4 @@ const HeadData = (props) => {
   );
 };
 
-HeadData.propTypes = {
-  slug: PropTypes.string.isRequired,
-};
-
-export default HeadData;
+export default (props) => <Location>{(locationProps) => <HeadData {...locationProps} {...props} />}</Location>;
