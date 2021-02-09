@@ -64,7 +64,7 @@ const IndexTemplate = ({ data }) => {
   return (
     <Layout>
       <section className="section index">
-        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} slug={data.markdownRemark.fields.slug} />
+        <HeadData title={title} description={description} schema={`[${websiteSchema}, ${newsMediaSchema}]`} slug={""} />
         <div className="container content">
           <div className="index-latest-title">
             <h2>Latest Posts</h2>

@@ -16,7 +16,7 @@ const AuthorPage = (props) => {
 
   return (
     <Layout>
-      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} slug={post.fields.slug} />
+      <HeadData title={`${seoTitle} - ${siteName}`} description={seoDescription} slug={`/author${post.fields.slug}`} />
       <section className="section author-page">
         <div className="container">
           <div className="author-top">
