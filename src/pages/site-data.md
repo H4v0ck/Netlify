@@ -1,8 +1,8 @@
 ---
 templateKey: site-data
 title: ProgHunt
-logoSmall: /img/logo.png
-logoLarge: /img/logo-large.png
+logoSmall: /img/proghunt.png
+logoLarge: /img/brown-vintage-adventure-logo-2-.png
 faviconSmall: /img/favicon-16x16.jpg
 faviconLarge: /img/favicon-32x32.jpg
 facebook: https://www.facebook.com/proghunt
