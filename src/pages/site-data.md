@@ -25,10 +25,10 @@ colors:
   blockBackground: "#3c4758"
   headerBackground: "#71757a"
 topNav:
-  - title: Learning Guides
-    link: /learning-guides/
+  - title: Hunting Gear
+    link: /lHunting-gear/
     child:
-      - title: Miscellaneous
+      - title: Bow Hunting
         link: "#"
         child:
           - title: Test Post
@@ -42,14 +42,12 @@ topNav:
             link: /sample-post-buying/
           - title: Test Post
             link: /sample-post-buying/
-  - title: Buying Guides
-    link: /buying-guides/
+  - title: Hunting Guides
+    link: /hunting-guides/
     child:
       - title: Sample Post News
         link: /sample-post-buying/
         child: []
-      - title: Sample Post
-        link: /sample-post-buying/
   - title: News
     link: /news/
   - title: Reviews
