@@ -1,10 +1,10 @@
 ---
 templateKey: site-data
 title: ProgHunt
-logoSmall: /img/proghunt.png
-logoLarge: /img/brown-vintage-adventure-logo-2-.png
-faviconSmall: /img/favicon-16x16.jpg
-faviconLarge: /img/favicon-32x32.jpg
+logoSmall: /img/prog-1-.png
+logoLarge: /img/prog-1-.png
+faviconSmall: /img/prog-1-.png
+faviconLarge: /img/prog-1-.png
 facebook: https://www.facebook.com/proghunt
 youtube: https://www.youtube.com/proghunt
 twitter: https://www.twitter.com/proghunt
