@@ -22,8 +22,8 @@ colors:
   btnHoverBackground: "#91bbff"
   navbarShadow: "#828282"
   textColor: "#ffffff"
-  blockBackground: "#3c4758"
-  headerBackground: "#ffbd59"
+  blockBackground: ffbd59
+  headerBackground: "#d0cdc2"
 topNav:
   - title: Hunting Gear
     link: /lHunting-gear/
