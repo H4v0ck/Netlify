@@ -5,6 +5,7 @@ logoSmall: /img/prog-1-.png
 logoLarge: /img/prog-1-.png
 faviconSmall: /img/prog-1-.png
 faviconLarge: /img/prog-1-.png
+disqus: proghunt.disqus.com
 facebook: https://www.facebook.com/proghunt
 youtube: https://www.youtube.com/proghunt
 twitter: https://www.twitter.com/proghunt
