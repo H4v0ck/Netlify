@@ -23,7 +23,7 @@ colors:
   navbarShadow: "#828282"
   textColor: "#ffffff"
   blockBackground: "#3c4758"
-  headerBackground: "#71757a"
+  headerBackground: "#ffbd59"
 topNav:
   - title: Hunting Gear
     link: /lHunting-gear/
